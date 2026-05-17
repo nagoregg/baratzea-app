@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="eu">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Institutuko Baratzea</title>
+
+<style>
+body {
+  font-family: Arial, sans-serif;
+  background: linear-gradient(to bottom, #f1f8e9, #dcedc8);
+  margin: 0;
+  padding: 20px;
+}
+
+.container {
+  max-width: 750px;
+  margin: auto;
+  background-color: white;
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+h1, h2 {
+  text-align: center;
+  color: #2e7d32;
+}
+
+.logo {
+  text-align: center;
+  font-size: 60px;
+}
+
+.info {
+  background-color: #f9fff2;
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  margin-top: 15px;
+  font-weight: bold;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+button {
+  width: 100%;
+  margin-top: 25px;
+  padding: 12px;
+  background-color: #43a047;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #2e7d32;
+}
+
+.ondo {
+  color: green;
+  font-weight: bold;
+}
+
+.gaizki {
+  color: red;
+  font-weight: bold;
+}
+
+.pista {
+  background-color: #fff8d6;
+  padding: 10px;
+  border-radius: 6px;
+  margin-bottom: 10px;
+}
+
+.emaitzak {
+  margin-top: 25px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="logo">🌱🥕🥬</div>
+<h1>Institutuko Baratzea</h1>
+<h2>Kalkulu Egiaztatzailea</h2>
+
+<div class="info">
+<p><strong>Datuak:</strong></p>
+<ul>
+<li>12 baratze-alor</li>
+<li>Baratze-alor bakoitza: 5m x 2m</li>
+<li>Erdia urazentzat eta erdia azenarioentzat</li>
+<li>1m² bakoitzean: 4 uraza edo 10 azenario</li>
+<li>Uraza = 0,50€</li>
+<li>Azenarioa = 0,10€</li>
+</ul>
+</div>
+
+<label>Baratze-alor bakoitzaren azalera (m²)</label>
+<input type="number" id="azaleraAlor">
+
+<label>Azalera osoa (m²)</label>
+<input type="number" id="azaleraOsoa">
+
+<label>Uraza kopurua</label>
+<input type="number" id="urazaKop">
+
+<label>Azenario kopurua</label>
+<input type="number" id="azenarioKop">
+
+<label>Urazen irabazia (€)</label>
+<input type="number" step="0.01" id="diruaUraza">
+
+<label>Azenarioen irabazia (€)</label>
+<input type="number" step="0.01" id="diruaAzenario">
+
+<label>Irabazi osoa (€)</label>
+<input type="number" step="0.01" id="diruaGuztira">
+
+<button onclick="egiaztatu()">Egiaztatu emaitzak</button>
+
+<div class="emaitzak" id="emaitzak"></div>
+
+</div>
+
+<script>
+function egiaztatu() {
+
+const zuzenaAzaleraAlor = 10;
+const zuzenaAzaleraOsoa = 120;
+const zuzenaUraza = 240;
+const zuzenaAzenario = 600;
+const zuzenaDiruaUraza = 120;
+const zuzenaDiruaAzenario = 60;
+const zuzenaDiruaGuztira = 180;
+
+const azaleraAlor = Number(document.getElementById('azaleraAlor').value);
+const azaleraOsoa = Number(document.getElementById('azaleraOsoa').value);
+const urazaKop = Number(document.getElementById('urazaKop').value);
+const azenarioKop = Number(document.getElementById('azenarioKop').value);
+const diruaUraza = Number(document.getElementById('diruaUraza').value);
+const diruaAzenario = Number(document.getElementById('diruaAzenario').value);
+const diruaGuztira = Number(document.getElementById('diruaGuztira').value);
+
+let emaitza = '<h3>Emaitzen egiaztapena</h3>';
+
+if (azaleraAlor === zuzenaAzaleraAlor) {
+  emaitza += '<p class="ondo">✔ Baratze-alor bakoitzaren azalera zuzena da.</p>';
+} else {
+  emaitza += '<p class="gaizki">✘ Baratze-alor bakoitzaren azalera ez da zuzena.</p>';
+  emaitza += '<div class="pista">Pista: Luzera × zabalera egin behar da.</div>';
+}
+
+if (azaleraOsoa === zuzenaAzaleraOsoa) {
+  emaitza += '<p class="ondo">✔ Azalera osoa zuzena da.</p>';
+} else {
+  emaitza += '<p class="gaizki">✘ Azalera osoa ez da zuzena.</p>';
+  emaitza += '<div class="pista">Pista: Baratze-alor baten azalera 12rekin biderkatu.</div>';
+}
+
+if (urazaKop === zuzenaUraza) {
+  emaitza += '<p class="ondo">✔ Uraza kopurua zuzena da.</p>';
+} else {
+  emaitza += '<p class="gaizki">✘ Uraza kopurua ez da zuzena.</p>';
+  emaitza += '<div class="pista">Pista: Azalera osoaren erdia urazentzat da.</div>';
+}
+
+if (azenarioKop === zuzenaAzenario) {
+  emaitza += '<p class="ondo">✔ Azenario kopurua zuzena da.</p>';
+} else {
+  emaitza += '<p class="gaizki">✘ Azenario kopurua ez da zuzena.</p>';
+  emaitza += '<div class="pista">Pista: m² bakoitzean 10 azenario sartzen dira.</div>';
+}
+
+if (diruaUraza === zuzenaDiruaUraza) {
+  emaitza += '<p class="ondo">✔ Urazen irabazia zuzena da.</p>';
+} else {
+  emaitza += '<p class="gaizki">✘ Urazen irabazia ez da zuzena.</p>';
+  emaitza += '<div class="pista">Pista: Uraza kopurua × 0,50€ egin.</div>';
+}
+
+if (diruaAzenario === zuzenaDiruaAzenario) {
+  emaitza += '<p class="ondo">✔ Azenarioen irabazia zuzena da.</p>';
+} else {
+  emaitza += '<p class="gaizki">✘ Azenarioen irabazia ez da zuzena.</p>';
+  emaitza += '<div class="pista">Pista: Azenario kopurua × 0,10€ egin.</div>';
+}
+
+if (diruaGuztira === zuzenaDiruaGuztira) {
+  emaitza += '<p class="ondo">✔ Irabazi osoa zuzena da.</p>';
+} else {
+  emaitza += '<p class="gaizki">✘ Irabazi osoa ez da zuzena.</p>';
+  emaitza += '<div class="pista">Pista: Urazen eta azenarioen irabaziak batu.</div>';
+}
+
+document.getElementById('emaitzak').innerHTML = emaitza;
+}
+</script>
+
+</body>
+</html>
